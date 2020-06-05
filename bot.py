@@ -37,11 +37,14 @@ client = commands.Bot(command_prefix='!')
 
 @client.command(name='map')
 async def map(ctx):
+    print(maps)
     await ctx.send(maps[random.randint(0, len(maps) - 1)])
 
 @client.command(name='add')
-async def add(ctx, arg):
-    await ctx.send(arg)
+async def add(ctx, *args):
+    new_map = ' '.join(args)
+    maps.append(new_map)
+    await ctx.send("Added {} to map pool".format(new_map))
 
 @client.command(name='reset')
 async def reset(ctx):
