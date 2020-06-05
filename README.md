@@ -41,6 +41,6 @@ $ heroku config:set DISCORD_TOKEN={ API_key }
 ```
 Where `{ API_key }` should be replaed with your API key. Then, push and deploy the container:
 ```
-# heroku container:push web --app zombies-randomizer
-# heroku container:release web --app zombies-randomizer
+# heroku container:push worker --app zombies-randomizer
+# heroku container:release worker --app zombies-randomizer
 ```
