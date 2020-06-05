@@ -43,14 +43,39 @@ async def map(ctx):
 @client.command(name='add')
 async def add(ctx, *args):
     new_map = ' '.join(args)
-    maps.append(new_map)
-    await ctx.send("Added {} to map pool".format(new_map))
+
+    # prevent dupes
+    if new_map in maps:
+        await ctx.send("{} already in map pool!".format(new_map))
+    else:
+        maps.append(new_map)
+        await ctx.send("Added {} to map pool".format(new_map))
 
 @client.command(name='reset')
 async def reset(ctx):
     maps[:] = default_maps.copy()
     print(maps)
     await ctx.send("Reset maps to original list")
+
+@client.command(name='pop')
+async def reset(ctx):
+    # TODO - do not pop original items
+    last_map = maps[-1]
+    maps.pop()
+    print(maps)
+    await ctx.send("Removed {} from list".format(last_map))
+
+@client.command(name='remove')
+async def reset(ctx, *args):
+    map_name = ' '.join(args)
+
+    # TODO - case insensitive
+    if not map_name in maps:
+        await ctx.send("{} not in list! Nothing to remove".format(map_name))
+    else:
+        maps.remove(map_name)
+        await ctx.send("Removed {} from list".format(map_name))
+
 
 # @client.event
 # async def on_ready():
