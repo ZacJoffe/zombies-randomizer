@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 
 import os
-import discord
+# import discord
 import random
 from dotenv import load_dotenv
+from discord.ext import commands
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 # print(TOKEN)
 
 random.seed()
-client = discord.Client()
+# client = discord.Client()
 
-maps = [
+default_maps = [
     "Shadows of Evil",
     "The Giant",
     "Der Eisendrache",
@@ -29,17 +30,46 @@ maps = [
     "Origins"
 ]
 
-@client.event
-async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+maps = default_maps
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+client = commands.Bot(command_prefix='!')
+# bot = commands.Bot(command_prefix='!')
 
-    if message.content.startswith('!map'):
-        await message.channel.send(maps[random.randint(0, 13)])
+@client.command(name='map')
+async def map(ctx):
+    await ctx.send(maps[random.randint(0, len(maps) - 1)])
+
+@client.command(name='add')
+async def add(ctx, arg):
+    await ctx.send(arg)
+
+@client.command(name='reset')
+async def reset(ctx):
+    maps = default_maps
+    print(maps)
+    await ctx.send("Reset maps to original list")
+
+# @client.event
+# async def on_ready():
+#     print(f'{client.user} has connected to Discord!')
+
+
+# @client.event
+# async def on_message(message):
+#     if message.author == client.user:
+#         return
+
+#     if message.content.startswith('!map'):
+#         await message.channel.send(maps[random.randint(0, len(maps) - 1)])
+
+#     if message.content.startswith('!moss'):
+#         await message.channel.send("Nacht der Untoten")
+
+#     if message.content.startswith('!add'):
+#         await message.channel.send(maps[random.randint(0, len(maps) - 1)])
+
+#     if message.content.startswith('!reset'):
+#         default_maps = maps
 
 
 client.run(TOKEN)
