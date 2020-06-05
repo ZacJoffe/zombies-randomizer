@@ -1,5 +1,7 @@
 FROM python:3
-ADD . /
+# ADD . /
+ADD bot.py /
+ADD requirements.txt /
 RUN pip install -U -r requirements.txt
 CMD [ "python", "./bot.py" ]
 # FROM ubuntu:latest
