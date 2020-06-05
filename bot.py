@@ -30,7 +30,7 @@ default_maps = [
     "Origins"
 ]
 
-maps = default_maps
+maps = default_maps.copy()
 
 client = commands.Bot(command_prefix='!')
 # bot = commands.Bot(command_prefix='!')
@@ -48,7 +48,7 @@ async def add(ctx, *args):
 
 @client.command(name='reset')
 async def reset(ctx):
-    maps = default_maps
+    maps[:] = default_maps.copy()
     print(maps)
     await ctx.send("Reset maps to original list")
 
