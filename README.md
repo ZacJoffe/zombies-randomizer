@@ -27,7 +27,7 @@ I used the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) tool t
 Login to Heroku. Note this needs to be done with `sudo` as we need to access the Docker daemon.
 ```
 # heroku login
-# heroku container:login 
+# heroku container:login
 ```
 
 Create the app:
